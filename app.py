@@ -69,7 +69,6 @@ modulo = st.sidebar.radio("Módulos de la aplicación", [
 ])
 
 st.sidebar.markdown("---")
-st.sidebar.info("Desarrollado con Streamlit y Plotly")
 
 st.sidebar.markdown(
     """
