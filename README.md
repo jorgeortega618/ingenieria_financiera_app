@@ -1,4 +1,4 @@
-# 📈 Aplicación Avanzada de Ingeniería Económica y Financiera
+# 📈 Aplicación de Ingeniería Económica y Financiera
 
 ![Python](https://img.shields.io/badge/Python-3.14-blue?style=flat&logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.30+-FF4B4B?style=flat&logo=streamlit&logoColor=white)
@@ -7,7 +7,7 @@
 
 Este repositorio contiene una aplicación de grado institucional, desarrollada como una herramienta monolítica modular, para resolver casos de negocio integrales relacionados con matemáticas financieras, estructuración de crédito y valoración de activos.
 
-El proyecto está diseñado para funcionar como un motor interactivo en la web, ofreciendo una experiencia visual y analítica rigurosa dirigida a consultores y analistas económicos de **Jorge Ortega**.
+El proyecto está diseñado para funcionar como un motor interactivo en la web, ofreciendo una experiencia visual y analítica rigurosa dirigida a consultores y analistas económicos.
 
 ---
 
@@ -86,4 +86,4 @@ streamlit run app.py
 El servidor asignará por default el ambiente en `localhost:8501`. 
 
 ### Contacto y Redes
-Desarrollado y Curado por **Jorge Ortega**. Para contacto sobre arquitectura de datos o validación financiera, usted puede referirse al desarrollador mediante este hub en GitHub `(jorgeortega618)`.
+Desarrollado y Curado por **Jorge Ortega**. Para contacto sobre arquitectura de datos o validación financiera, usted puede referirse al desarrollador mediante este hub en GitHub `(jorgeortega618)` email: jorgeortega618@gmail.com.
