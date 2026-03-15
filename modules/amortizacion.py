@@ -8,16 +8,7 @@ def render_amortizacion():
     st.header("Módulo 3: Tablas de Amortización de Créditos")
     st.markdown("Generador avanzado de esquemas de pago de deudas (Cuota Fija o Abono Constante) con opciones de periodo de gracia.")
 
-    st.markdown("""
-        <style>
-        .box-container {
-            background-color: #1e293b;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    # Style removido
 
     # Configurador de Deuda
     col1, col2 = st.columns(2)

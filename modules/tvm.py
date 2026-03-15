@@ -9,17 +9,7 @@ def render_tvm():
     st.markdown("Calculadora avanzada para despejar incógnitas de Valor Presente, Valor Futuro, Pagos, Tasa o Periodos.")
 
     # Tarjeta base
-    st.markdown("""
-        <style>
-        .box-container {
-            background-color: #1e293b;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #00ffcc;
-            margin-bottom: 20px;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    # Style removido a app.py
 
     st.markdown('<div class="box-container">', unsafe_allow_html=True)
     incognita = st.selectbox("¿Qué parámetro desea calcular?", [

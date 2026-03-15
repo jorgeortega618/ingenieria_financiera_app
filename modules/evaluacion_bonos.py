@@ -7,16 +7,7 @@ from utils.plots import apply_custom_theme
 def render_evaluacion_bonos():
     st.header("Módulo 5: Evaluación de Proyectos y Bonos Corporativos")
     
-    st.markdown("""
-        <style>
-        .box-container {
-            background-color: #1e293b;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    # Style transferido
     
     tab_proy, tab_bonos = st.tabs(["Evaluación de Proyectos FCF", "Valoración de Bonos Financieros"])
     

@@ -8,16 +8,7 @@ def render_fcf_depreciacion():
     st.header("Módulo 4: Flujo de Efectivo Libre y Depreciación")
     st.markdown("Proyecte escenarios financieros definiendo horizontes de años, esquemas de depreciación y flujos operativos con cuadrículas editables.")
 
-    st.markdown("""
-        <style>
-        .box-container {
-            background-color: #1e293b;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    # Style transferido
 
     # 1. Configuración General
     st.markdown('<div class="box-container" style="border-left: 5px solid #00ffcc;">', unsafe_allow_html=True)

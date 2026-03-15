@@ -5,17 +5,7 @@ def render_tasas():
     st.header("Módulo 1: Conversión de Tasas de Interés")
     st.markdown("Herramienta interactiva para la equivalencia de tasas Nominales, Efectivas y Periódicas.")
 
-    # Tarjeta de estilo visual (colores y bordes para agrupar)
-    st.markdown("""
-        <style>
-        .box-container {
-            background-color: #1e293b;
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 5px solid #00ffcc;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    # Espacio intencional donde iba el tag de estilo
 
     col1, col2 = st.columns(2)
 
