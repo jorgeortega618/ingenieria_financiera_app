@@ -104,6 +104,63 @@ def render_tvm():
     except Exception as e:
         st.error(f"Error en el cálculo: Revise las convenciones de signos (+ Entradas, - Salidas). Detalles: {e}")
 
+    # Explicación paso a paso de Fórmulas Financieras
+    if resultado is not None and not pd.isna(resultado):
+        with st.expander("Ver explicación técnica matemática a este cálculo"):
+            st.markdown("La calculadora TVM (Time Value of Money) resuelve analíticamente funciones base de matemáticas financieras mediante la equivalencia de valores en una línea de tiempo a interés compuesto.")
+            
+            vp_val = f"${vp:,.2f}" if vp is not None else "0.00"
+            vf_val = f"${vf:,.2f}" if vf is not None else "0.00"
+            pmt_val = f"${pmt:,.2f}" if pmt is not None else "0.00"
+            i_val = f"{tasa*100:,.4f}\%" if tasa is not None else "0.00\%"
+            n_val = f"{nper:,.2f}" if nper is not None else "0"
+            momento = "1" if when == 1 else "0"
+            
+            st.markdown(f"**Variables Detectadas en su Escenario:**")
+            st.markdown(f"- **VP** = {vp_val} | **VF** = {vf_val} | **PMT** = {pmt_val} | **$i$** = {i_val} | **$n$** = {n_val}")
+            st.markdown(f"- **Modalidad de la Anualidad (When):** {'Anticipada (Principio del periodo)' if when == 1 else 'Vencida (Final del periodo)'}")
+            
+            st.markdown("---")
+            if incognita == "Valor Futuro (VF)":
+                st.markdown("**1. Función Analítica Despejada: Capitalización (Valor Futuro)**")
+                st.markdown("El Valor Futuro considera el flujo primario sumado a la acumulación periódica de todas las anualidades del intervalo.")
+                st.latex(r"VF_{anualidad} = PMT \times \left[ \frac{(1+i)^n - 1}{i} \right]")
+                st.latex(r"VF_{capital} = VP \times (1+i)^n")
+                st.latex(rf"VF_{{total}} = - (VP_{{capital}} + VF_{{anualidad}})")
+                if when == 1:
+                    st.markdown("*Nota:* Al ser anualidad anticipada, el factor del $PMT$ es ponderado por $(1+i)$.")
+                st.latex(rf"VF_{{resultado}} = {vf_val}")
+            
+            elif incognita == "Valor Presente (VP)":
+                st.markdown("**1. Función Analítica Despejada: Descuento (Valor Presente)**")
+                st.markdown("El Valor Presente trae al punto temporal contable $t=0$ todos los flujos fijos a una tasa de costo de oportunidad dada.")
+                st.latex(r"VP_{anualidad} = PMT \times \left[ \frac{1 - (1+i)^{-n}}{i} \right]")
+                st.latex(r"VP_{flujo\_final} = \frac{VF}{(1+i)^n}")
+                st.latex(rf"VP_{{total}} = - (VP_{{flujo\_final}} + VP_{{anualidad}})")
+                if when == 1:
+                    st.markdown("*Nota:* Al ser anualidad anticipada, el factor del $PMT$ se ajusta por $(1+i)$.")
+                st.latex(rf"VP_{{resultado}} = {vp_val}")
+
+            elif incognita == "Pago / Cuota Constante (PMT)":
+                st.markdown("**1. Función Analítica Despejada: Amortización (Anualidad / Renta P)**")
+                st.markdown("Genera el flujo regular requerido en $n$ partes exactas que absorba deuda o cree un flujo de acumulación del monto.")
+                st.latex(r"PMT_{Amortizado} = \frac{VP \cdot i}{1 - (1+i)^{-n}}")
+                st.latex(r"PMT_{Renta\_Fondo} = \frac{VF \cdot i}{(1+i)^n - 1}")
+                st.markdown("El motor balancea la ecuación de equilibrio general consolidando el PMT neto negativo o positivo.")
+                st.latex(rf"PMT_{{resultado}} = {pmt_val}")
+
+            elif incognita == "Número de Periodos (Nper)":
+                st.markdown("**1. Función Analítica Despejada: Barrera Temporal Cíclica ($n$)**")
+                st.markdown("Despejado mediante logaritmo natural la función de equivalencia estructural de los capitales de la anualidad.")
+                st.latex(r"n = \frac{ \ln\left( \frac{VF \cdot i + PMT}{VP \cdot i + PMT} \right) }{\ln(1+i)}") 
+                st.latex(rf"n_{{resultado}} = {n_val} \; periodos")
+            
+            elif incognita == "Tasa de Interés por Periodo (i)":
+                st.markdown("**1. Función Analítica Despejada: Determinación del Costo del Dinero Secuencial ($i$)**")
+                st.markdown("Matemáticamente, es imposible despejar orgánicamente la tasa $i$ de una ecuación TVM completa que cruza Capitales ($VP, VF$) con Rentas ($PMT$).")
+                st.warning("El motor ha utilizando algoritmos algorítmicos iterativos en memoria tipo **Newton-Raphson** para buscar un cruce alométrico convergente donde el $VAN = 0$ a través de los gradientes de la línea de tiempo. Éste es el valor encontrado:")
+                st.latex(rf"i_{{efectivo\_resultado}} = {i_val}")
+
     # Diagrama de Flujo de Efectivo
     st.markdown("### Diagrama de Flujos de Efectivo")
     st.info("Visualización de las entradas y salidas de dinero a lo largo del tiempo de la operación.")
