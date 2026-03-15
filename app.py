@@ -119,7 +119,14 @@ if modulo == "Inicio":
     
     with col1:
         st.markdown('<div class="box-container" style="text-align:center;">', unsafe_allow_html=True)
-        st.markdown("### 🔄 Tasas y TVM")
+        st.markdown("""
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 15px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4318FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;">
+                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                </svg>
+                <h3 style="margin: 0; padding: 0;">Tasas y TVM</h3>
+            </div>
+        """, unsafe_allow_html=True)
         st.markdown("<p style='color: #64748b; font-size: 0.95rem; min-height: 80px;'>Convierta tasas de interés complejas y analice el valor del dinero en el tiempo con flujos interactivos.</p>", unsafe_allow_html=True)
         st.button("Conversión de Tasas", on_click=lambda: st.session_state.update(modulo_actual="1. Conversión de Tasas"), use_container_width=True)
         st.button("Calculadora TVM", on_click=lambda: st.session_state.update(modulo_actual="2. Valor del Dinero en el Tiempo (TVM)"), use_container_width=True)
@@ -127,14 +134,32 @@ if modulo == "Inicio":
 
     with col2:
         st.markdown('<div class="box-container" style="text-align:center;">', unsafe_allow_html=True)
-        st.markdown("### 📊 Amortización")
+        st.markdown("""
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 15px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4318FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;">
+                    <line x1="18" y1="20" x2="18" y2="14"/>
+                    <line x1="12" y1="20" x2="12" y2="10"/>
+                    <line x1="6" y1="20" x2="6" y2="4"/>
+                </svg>
+                <h3 style="margin: 0; padding: 0;">Amortización</h3>
+            </div>
+        """, unsafe_allow_html=True)
         st.markdown("<p style='color: #64748b; font-size: 0.95rem; min-height: 80px;'>Proyecte esquemas de deuda y visualice la composición de capital e intereses en cada cuota financiada.</p>", unsafe_allow_html=True)
         st.button("Tabla Amortización", on_click=lambda: st.session_state.update(modulo_actual="3. Tablas de Amortización"), use_container_width=True)
         st.markdown('</div>', unsafe_allow_html=True)
 
     with col3:
         st.markdown('<div class="box-container" style="text-align:center;">', unsafe_allow_html=True)
-        st.markdown("### 📈 Evaluaciones")
+        st.markdown("""
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 15px;">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#4318FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="3" y1="9" x2="21" y2="9"/>
+                    <line x1="9" y1="21" x2="9" y2="9"/>
+                </svg>
+                <h3 style="margin: 0; padding: 0;">Evaluaciones</h3>
+            </div>
+        """, unsafe_allow_html=True)
         st.markdown("<p style='color: #64748b; font-size: 0.95rem; min-height: 80px;'>Cree proyecciones de flujo, calcule VPN, TIR y valore bonos corporativos e instrumentos al instante.</p>", unsafe_allow_html=True)
         st.button("Flujo de Efectivo", on_click=lambda: st.session_state.update(modulo_actual="4. Flujo de Efectivo FCF y Depreciación"), use_container_width=True)
         st.button("Valoración", on_click=lambda: st.session_state.update(modulo_actual="5. Evaluación de Proyectos y Bonos"), use_container_width=True)
