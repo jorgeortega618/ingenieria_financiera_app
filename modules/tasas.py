@@ -115,3 +115,47 @@ def render_tasas():
         label_destino += f" ({capitalizacion_destino})"
 
     st.success(f"{label_origen}  ➔  **{label_destino}**")
+
+    # Explicación paso a paso
+    with st.expander("Ver explicación técnica paso a paso"):
+        st.markdown("El motor de cálculo estandariza cualquier parámetro de entrada iterando hacia una Tasa Efectiva Anual (EA) como pivote, para luego derivarla a su destino.")
+        
+        st.markdown("**Paso 1: Llevar la tasa de origen a Efectiva Anual (EA)**")
+        if tipo_origen == "Nominal":
+            if anticipada_origen:
+                st.latex(rf"i_a = \frac{{ {tasa_origen*100:.4f}\% }}{{ {m_origen} }} = {tasa_periodica_ant*100:.4f}\%")
+                st.latex(rf"i_v = \frac{{ i_a }}{{ 1 - i_a }} = {tasa_periodica_ven*100:.4f}\%")
+                st.latex(rf"EA = (1 + i_v)^{{{m_origen}}} - 1 = {tasa_efectiva_anual*100:.4f}\%")
+            else:
+                st.latex(rf"i_v = \frac{{ {tasa_origen*100:.4f}\% }}{{ {m_origen} }} = {tasa_periodica_ven*100:.4f}\%")
+                st.latex(rf"EA = (1 + i_v)^{{{m_origen}}} - 1 = {tasa_efectiva_anual*100:.4f}\%")
+        elif tipo_origen == "Periódica":
+            if anticipada_origen:
+                st.latex(rf"i_v = \frac{{ {tasa_origen*100:.4f}\% }}{{ 1 - {tasa_origen*100:.4f}\% }} = {tasa_periodica_ven*100:.4f}\%")
+                st.latex(rf"EA = (1 + i_v)^{{{m_origen}}} - 1 = {tasa_efectiva_anual*100:.4f}\%")
+            else:
+                st.latex(rf"EA = (1 + {tasa_origen*100:.4f}\%)^{{{m_origen}}} - 1 = {tasa_efectiva_anual*100:.4f}\%")
+        else: # Efectiva
+            if anticipada_origen:
+                st.latex(rf"EA = \frac{{ {tasa_origen*100:.4f}\% }}{{ 1 - {tasa_origen*100:.4f}\% }} = {tasa_efectiva_anual*100:.4f}\%")
+            else:
+                st.markdown("La tasa ya es Efectiva Anual.")
+                st.latex(rf"EA = {tasa_efectiva_anual*100:.4f}\%")
+
+        st.markdown("**Paso 2: Transformar la EA a la Tasa de Destino Solicitada**")
+        if tipo_destino == "Efectiva":
+            st.markdown("No se requiere cálculo adicional, el pivote (EA) ya corresponde al destino.")
+        else:
+            st.latex(rf"i_v = (1 + {tasa_efectiva_anual*100:.4f}\%)^\frac{{1}}{{{m_destino}}} - 1 = {tasa_periodica_dest_ven*100:.4f}\%")
+            
+            if anticipada_destino:
+                st.latex(rf"i_a = \frac{{ i_v }}{{ 1 + i_v }} = {tasa_periodica_dest_ant*100:.4f}\%")
+                if tipo_destino == "Nominal":
+                    st.latex(rf"Tasa \; Nominal = i_a \times {m_destino} = {tasa_resultado*100:.4f}\%")
+                else:
+                    st.latex(rf"Tasa \; Periódica \; Anticipada = i_a = {tasa_resultado*100:.4f}\%")
+            else:
+                if tipo_destino == "Nominal":
+                    st.latex(rf"Tasa \; Nominal = i_v \times {m_destino} = {tasa_resultado*100:.4f}\%")
+                else: # Periódica
+                    st.latex(rf"Tasa \; Periódica \; Vencida = i_v = {tasa_resultado*100:.4f}\%")
